@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import FetchApi from "./Components/FetchApi";
+import Main from "./Components/Main";
+import Searchs from "./Components/Searchs";
 
 function App() {
+  const [user, setUser] = useState("");
+  
+
+  const username = (path) => {
+    setUser(path);
+  };
+
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    {  user === "" ? <Searchs username={username} /> : null}
+      
+      {/* <Searchs username={username}/> */}
+
+      {user === "" ? null : <Main user={user} />}
+      {user === "" ? null : <FetchApi user={user} />}
+    </>
   );
 }
 
